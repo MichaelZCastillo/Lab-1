@@ -155,12 +155,14 @@ public class ArrayIndexList<E> implements IndexList<E> {
 		if(array.length < size) {
 			array = (T1[]) Array.newInstance(array.getClass().getComponentType() , size);
 		}
-		for(int i = size; i < array.length; i++) {
-				array[i] = null;
-			}
-		for(int i = 0; i < size; i++){
+		for(int i = 0; i < array.length; i++) {
+			if(i <= size) {
 				array[i] = (T1) element[i];
 			}
+			else {
+				array[i] = null;
+			}
+		}
 		return array;
 	}
 }
