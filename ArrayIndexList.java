@@ -149,13 +149,18 @@ public class ArrayIndexList<E> implements IndexList<E> {
 	}
 
 
+	@Override
 	public <T1> T1[] toArray(T1[] array) {
 		// TODO as in Exercise 3
-		array = (T1[]) new Object[capacity()];
-		for (int i = 0; i < capacity(); i++) {
-			array[i] = (T1) get(i);
+		if(array.length < size) {
+			array = (T1[]) Array.newInstance(array.getClass().getComponentType() , size);
 		}
+		for(int i = size; i < array.length; i++) {
+				array[i] = null;
+			}
+		for(int i = 0; i < size; i++){
+				array[i] = (T1) element[i];
+			}
 		return array;
 	}
-
 }
